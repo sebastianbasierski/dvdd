@@ -4,7 +4,8 @@ source /rbin/common.sh
 
 check_if_sudo
 
-settings_file="/domoticz/domoticz.conf"
+settings_file_src="/domoticz/domoticz.conf"
+settings_file_dest="/etc/domoticz/domoticz.conf"
 service_file="/domoticz/domoticz-sensors.service"
 
 if [ "$#" -eq 2 ]; then
@@ -22,6 +23,7 @@ fi
 case $mode in
 	'install')
 		sudo cp ${service_file} "/lib/systemd/system/${service_file}"
+		sudo cp ${settings_file_src} ${setting_file_dest}
 		sudo systemctl daemon-reload
 		;;
 
