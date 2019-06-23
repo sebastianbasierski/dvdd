@@ -5,17 +5,7 @@ source /rbin/common.sh
 check_if_sudo
 
 settings_file="/domoticz/domoticz.conf"
-
-function prepare_mtun {
-	# check if we have git installed
-	# check if we have build-essential installed
-	cd /tmp
-	git clone git@gitlab.basierski.pl:LinuxSoftware/main.git
-	cd main
-	git checkout mtun
-	git-manager clone
-	./build.sh install
-}
+service_file="/domoticz/domoticz-sensors.service"
 
 if [ "$#" -eq 2 ]; then
 	mode=$1
@@ -30,41 +20,24 @@ else
 fi
 
 case $mode in
-	'install-client')
-		sudo cp /rbin/mtun-client.service "/lib/systemd/system/mtun-client_$number.service"
-		sed -i "s:ExecStart=/rbin/mtun-client-start.sh:ExecStart=/rbin/mtun-client-start.sh $settings_file:g" "/lib/systemd/system/mtun-client_$number.service"
-		sudo systemctl daemon-reload
-		;;
-
-	'install-server')
-		sudo cp /rbin/mtun-server.service "/lib/systemd/system/mtun-server_$number.service"
-		sed -i "s:ExecStart=/rbin/mtun-server-start.sh:ExecStart=/rbin/mtun-server-start.sh $settings_file:" "/lib/systemd/system/mtun-server_$number.service"
+	'install')
+		sudo cp ${service_file} "/lib/systemd/system/${service_file}"
 		sudo systemctl daemon-reload
 		;;
 
 	'remove')
-		sudo rm "/lib/systemd/system/mtun-*_$number.service"
+		sudo rm ${service_file}
 		sudo systemctl daemon-reload
 		;;
 
-	'start-client')
-		sudo systemctl enable "mtun-client_$number.service"
-		sudo systemctl start "mtun-client_$number.service"
+	'start')
+		sudo systemctl enable ${service_file}
+		sudo systemctl start ${service_file}
 		;;
 
-	'start-server')
-		sudo systemctl enable "mtun-server_$number.service"
-		sudo systemctl start "mtun-server_$number.service"
-		;;
-
-	'stop-client')
-		sudo systemctl disable "mtun-client_$number.service"
-		sudo systemctl stop "mtun-client_$number.service"
-		;;
-
-	'stop-server')
-		sudo systemctl disable "mtun-server_$number.service"
-		sudo systemctl stop "mtun-server_$number.service"
+	'stop')
+		sudo systemctl disable ${service_file}
+		sudo systemctl stop ${service_file}
 		;;
 
 	*)
