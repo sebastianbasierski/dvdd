@@ -4,26 +4,34 @@ source /rbin/common.sh
 
 check_if_sudo
 
-settings_file_src="/domoticz/domoticz.conf"
-settings_file_dest="/etc/domoticz/domoticz.conf"
-service_file="/domoticz/domoticz-sensors.service"
+config_file="domoticz.conf"
+service_file="domoticz-sensors.service"
+local_dir="/domoticz"
+settings_dir="/etc/domoticz"
+settings_file_src="${local_dir}/${config_file}"
+settings_file_dest="${settings_dir}/${config_file}"
+service_file_src="${local_dir}/${service_file}"
 
-if [ "$#" -eq 2 ]; then
+if [ "$#" -eq 1 ]; then
 	mode=$1
-	number=$2
-elif [ "$#" -eq 3 ]; then
-	mode=$1
-	settings_file=$2
-	number=$3
 else
 	echo "Nieprawidłowa ilość parametrów. Użycie $0 [tryb] [plik konfiguracyjny] [numer tunelu]"
 	exit 1
 fi
 
+# check current dir
+dir=$(pwd)
+
+if [ "${dir}" != "${local_dir}" ]; then
+	echo "Wrong directory. Please move scripts to ${local_dir}"
+	exit 2
+fi
+
 case $mode in
 	'install')
 		sudo cp ${service_file} "/lib/systemd/system/${service_file}"
-		sudo cp ${settings_file_src} ${setting_file_dest}
+		sudo mkdir -p ${settings_dir}
+		sudo cp ${settings_file_src} ${settings_file_dest}
 		sudo systemctl daemon-reload
 		;;
 
