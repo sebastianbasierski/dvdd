@@ -1,0 +1,6 @@
+*.pyc
+htmlcov/
+libs/*cover
+.coverage
+reports/
+*gz
