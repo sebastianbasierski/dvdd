@@ -31,3 +31,22 @@ def get_sensor_name(idx):
         name = None
 
     return name
+
+def get_sensor_idx(name):
+    try:
+        from configparser import ConfigParser
+    except ImportError:
+        from ConfigParser import ConfigParser  # ver. < 3.0
+
+    config = ConfigParser()
+
+    config.read('/etc/domoticz/domoticz.conf')
+
+    # read sensor name
+    try:
+        idx = config.get(name, 'idx')
+    except:
+        idx = -1
+
+    return idx
+
