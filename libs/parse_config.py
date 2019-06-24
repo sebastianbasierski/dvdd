@@ -50,3 +50,39 @@ def get_sensor_idx(name):
 
     return idx
 
+def get_sensor_script(name):
+    try:
+        from configparser import ConfigParser
+    except ImportError:
+        from ConfigParser import ConfigParser  # ver. < 3.0
+
+    config = ConfigParser()
+
+    config.read('/etc/domoticz/domoticz.conf')
+
+    # read sensor name
+    try:
+        script = config.get(name, 'script')
+    except:
+        script = None
+
+    return script
+
+def get_sensor_interval(name):
+    try:
+        from configparser import ConfigParser
+    except ImportError:
+        from ConfigParser import ConfigParser  # ver. < 3.0
+
+    config = ConfigParser()
+
+    config.read('/etc/domoticz/domoticz.conf')
+
+    # read sensor name
+    try:
+        interval= config.get(name, 'interval')
+    except:
+        interval = None
+
+    return interval
+
