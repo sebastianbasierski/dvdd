@@ -21,3 +21,18 @@ def test_get_sensor_idx():
 
     idx = get_sensor_idx('rpi_cppu_temp')
     assert int(idx) == -1
+
+def test_get_sensor_script():
+    script = get_sensor_script('rpi_cpu_temp')
+    assert script == 'cpu_temp.py'
+
+    script = get_sensor_script('rpi_cppu_temp')
+    assert script == None
+
+def test_get_sensor_interval():
+    interval = get_sensor_interval('rpi_cpu_temp')
+    assert interval == '30s'
+
+    interval = get_sensor_interval('rpi_cppu_temp')
+    assert interval == None
+
