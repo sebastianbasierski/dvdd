@@ -4,7 +4,7 @@ import urllib
 
 # parameters
 sensor_idx  = 1
-url_json = "http://172.16.2.36:8080/json.htm?type=command&param=udevice&idx="
+url_json = "http://172.16.2.40:8080/json.htm?type=command&param=udevice&idx="
 verbose  = 1  # set to 1 to print out information to the console 
 
 # read cpu temperature
