@@ -2,7 +2,7 @@
 Description=A domoticz sensors service
 
 [Service]
-Type=forking
+Type=simple
 ExecStart=/domoticz/sensors.py
 Restart=always
 RestartSec=30
