@@ -12,7 +12,7 @@ def test_handle_sensor():
     sensor = get_sensor_name(1)
     assert sensor == 'rpi_cpu_temp'
 
-    done = handle_sensor(sensor)
+    done = handle_sensor(sensor, True)
     assert done == True
 
 
