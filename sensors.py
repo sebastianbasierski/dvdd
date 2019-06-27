@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from libs.parse_config import *
+from libs.sensor_handling import *
 
 def main():
     count = get_sensors_count()
