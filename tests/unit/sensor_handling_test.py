@@ -9,10 +9,13 @@ def test_handle_sensor():
     assert count == '1'
     assert int(count) == 1
 
-    sensor = get_sensor_name(1)
-    assert sensor == 'rpi_cpu_temp'
+    name = get_sensor_name(1)
+    assert name == 'rpi_cpu_temp'
 
-    done = handle_sensor(sensor, True)
+    sensor = Sensor(name)
+    assert sensor != None
+
+    done = sensor.handle_sensor(True)
     assert done == True
 
 
