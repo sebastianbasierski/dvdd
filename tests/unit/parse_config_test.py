@@ -8,10 +8,10 @@ def test_get_sensors_count():
     assert int(count) == 1
 
 def test_get_sensor_name():
-    name = get_sensor_name(1)
+    name = get_sensor_name(0)
     assert name == 'rpi_cpu_temp'
 
-    name = get_sensor_name(0)
+    name = get_sensor_name(1)
     assert name == None
 
 def test_get_sensor_idx():
