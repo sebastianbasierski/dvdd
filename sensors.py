@@ -14,12 +14,14 @@ def sensor_thread(idx):
     done = handle_sensor(sensor)
 
 def main():
-    signal.signal(signal.SIGINT, signal_handler)
     count = get_sensors_count()
 
     t = Thread(target=sensor_thread, args=(1,))
     t.start()
        
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal_handler)
     main()
+    while True:
+        signal.pause()
 
