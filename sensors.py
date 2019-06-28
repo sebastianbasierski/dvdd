@@ -1,49 +1,43 @@
 #!/usr/bin/python
 import sys
 import signal
+from libs.storage import *
 from threading import Thread
 from libs.parse_config import *
 from libs.sensor_handling import *
 
-thread = []
-sensor = []
+storage = []
 
 def signal_handler(sig, frame):
-    global thread
-    global sensor
+    global storage
 
     print "Your pressed ctrl + c"
 
-    for s in sensor:
-        s.hs_stop()
-
-    for t in thread:
-        t.join()
+    for s in storage:
+        s.get_sensor().hs_stop()
+        s.get_thread().join()
 
     sys.exit(0)
 
 def sensor_thread(idx):
-    global sensor
+    global storage
 
-    s = sensor[idx].handle_sensor()
+    s = storage[idx].get_sensor().handle_sensor()
 
 def main():
-    global thread
-    global sensor
+    global storage
 
     count = get_sensors_count()
 
     for idx in range(int(count)):
         print "idx " + str(idx)
 
-        temp_sensor = Sensor(get_sensor_name(idx))
-        sensor.append(temp_sensor)
+        sensor = Sensor(get_sensor_name(idx))
+        thread = Thread(target=sensor_thread, args=(idx,))
+        storage.append(Storage(thread, sensor))
 
-        temp_thread = Thread(target=sensor_thread, args=(idx,))
-        thread.append(temp_thread)
-
-    for t in thread:
-        t.start()
+    for s in storage:
+        s.get_thread().start()
        
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
