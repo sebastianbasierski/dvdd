@@ -4,3 +4,4 @@ libs/*cover
 .coverage
 reports/
 *gz
+*swp
