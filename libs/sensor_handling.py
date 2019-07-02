@@ -15,7 +15,7 @@ class Sensor:
     def handle_sensor(self, one_time = None):
         one_time = one_time or False
         idx = get_sensor_idx(self.sensor)
-        script = get_sensor_script(self.sensor)
+        stype = get_sensor_type(self.sensor)
         interval = get_sensors_parse_interval(get_sensor_interval(self.sensor))
 
         if int(interval) == None:
@@ -25,9 +25,9 @@ class Sensor:
 
         while self.alive:
             # execute script
-            print("script " + script_dir + script)
-            normal = subprocess.call([script_dir + script, ""])
-            print("exit code " + str(normal))
+            #print("script " + script_dir + script)
+            #normal = subprocess.call([script_dir + script, ""])
+            #print("exit code " + str(normal))
 
             # sleep
             for i in range(int(interval)):
@@ -40,11 +40,6 @@ class Sensor:
                 # check exit condition
                 if self.alive == False:
                     return True
-
-            # execute script
-            print("script " + script_dir + script)
-            normal = subprocess.call([script_dir + script, ""])
-            print("exit code " + str(normal))
 
             # exit loop
             if one_time == True:

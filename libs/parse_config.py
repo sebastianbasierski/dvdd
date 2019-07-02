@@ -50,7 +50,7 @@ def get_sensor_idx(name):
 
     return idx
 
-def get_sensor_script(name):
+def get_sensor_type(name):
     try:
         from configparser import ConfigParser
     except ImportError:
@@ -62,7 +62,7 @@ def get_sensor_script(name):
 
     # read sensor name
     try:
-        script = config.get(name, 'script')
+        script = config.get(name, 'type')
     except:
         script = None
 
