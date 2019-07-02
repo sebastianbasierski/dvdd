@@ -30,8 +30,6 @@ def main():
     count = get_sensors_count()
 
     for idx in range(int(count)):
-        print "idx " + str(idx)
-
         sensor = Sensor(get_sensor_name(idx))
         thread = Thread(target=sensor_thread, args=(idx,))
         storage.append(Storage(thread, sensor))

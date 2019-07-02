@@ -30,10 +30,7 @@ class Sensor:
         script_dir = '/domoticz/'
 
         while self.alive:
-            # execute script
-            #print("script " + script_dir + script)
-            #normal = subprocess.call([script_dir + script, ""])
-            #print("exit code " + str(normal))
+            # send data
             sender.send()
 
             # sleep
