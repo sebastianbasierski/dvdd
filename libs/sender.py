@@ -7,7 +7,7 @@ class Sender():
         self.ip = ip
         self.port = port
 
-    def send():
+    def send(self):
         # parameters
         sensor_idx  = 1
         url_json = "http://172.16.2.40:8080/json.htm?type=command&param=udevice&idx="
