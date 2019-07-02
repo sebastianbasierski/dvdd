@@ -13,16 +13,30 @@ class Sensor:
     def hs_stop(self):
         self.alive = False
 
+    def get_cpu_temperature_json(self):
+        cpu_temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
+        print "cpu temp: " + str(cpu_temp)
+        json = "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(cpu_temp)
+        return json
+
+    def get_json(self):
+        switcher = {
+                "temperature": self.get_cpu_temperature_json
+        }
+
+        func = switcher.get(self.stype, lambda: "Invalid sensor type")
+        return func()
+
     def handle_sensor(self, one_time = None):
         one_time = one_time or False
-        idx = get_sensor_idx(self.sensor)
-        stype = get_sensor_type(self.sensor)
+        self.idx = get_sensor_idx(self.sensor)
+        self.stype = get_sensor_type(self.sensor)
         interval = get_sensors_parse_interval(get_sensor_interval(self.sensor))
 
         ip = '172.16.2.40'
         port = '8080'
         sender = Sender(ip, port)
-        sender.setup(idx)
+        sender.setup(self.idx)
 
         if int(interval) == None:
             return False
@@ -31,7 +45,9 @@ class Sensor:
 
         while self.alive:
             # send data
-            sender.send()
+            print "send data"
+            json = self.get_json()
+            sender.send(json)
 
             # sleep
             for i in range(int(interval)):

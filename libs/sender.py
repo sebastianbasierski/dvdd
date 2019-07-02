@@ -11,21 +11,21 @@ class Sender():
     def setup(self, idx):
         self.idx = idx
 
-    def send(self):
-        # parameters
-        url_json = "http://172.16.2.40:8080/json.htm?type=command&param=udevice&idx="
-        verbose  = 1  # set to 1 to print out information to the console 
+    def send(self, json):
 
-        # read cpu temperature
+        if json == None:
+            print "empty json passed"
+            return False
+
+        # parameters
+        cmd = "http://172.16.2.40:8080/" + json
+        verbose = 1  # set to 1 to print out information to the console
+
         # replace 1000.0 with 1000 to round to nearest degree   
         try:
-            cpuTemp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
-
             # use Domoticz JSON url to update
-            cmd = url_json + str(self.idx) + "&nvalue=0&svalue=" + str(cpuTemp)
             hf = urllib.urlopen(cmd)
             if verbose > 0:
-                print 'Sensor data: temperature = {0:0.1f}C'.format(cpuTemp)
                 print 'Uploaded to Pi: ' + cmd
                 print 'Response: ' + hf.read()
             hf.close

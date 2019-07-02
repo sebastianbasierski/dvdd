@@ -15,6 +15,9 @@ def test_sender_send():
     assert sender != None
 
     ret = sender.send()
+    assert ret == False
+
+    ret = sender.send("X")
     assert ret == True
 
 def test_sender_set_idx():
