@@ -1,6 +1,7 @@
 import os
 import time
 import subprocess
+from libs.sender import *
 from libs.parse_config import *
 from libs.parse_interval import *
 
@@ -18,6 +19,10 @@ class Sensor:
         stype = get_sensor_type(self.sensor)
         interval = get_sensors_parse_interval(get_sensor_interval(self.sensor))
 
+        ip = '172.16.2.40'
+        port = '8080'
+        sender = Sender(ip, port)
+
         if int(interval) == None:
             return False
 
@@ -28,6 +33,7 @@ class Sensor:
             #print("script " + script_dir + script)
             #normal = subprocess.call([script_dir + script, ""])
             #print("exit code " + str(normal))
+            sender.send()
 
             # sleep
             for i in range(int(interval)):
