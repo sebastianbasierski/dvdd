@@ -14,7 +14,7 @@ def test_sender_send():
     sender = Sender(ip, port)
     assert sender != None
 
-    ret = sender.send()
+    ret = sender.send(None)
     assert ret == False
 
     ret = sender.send("X")
