@@ -22,12 +22,12 @@ def test_get_sensor_idx():
     idx = get_sensor_idx('rpi_cppu_temp')
     assert int(idx) == -1
 
-def test_get_sensor_script():
-    script = get_sensor_script('rpi_cpu_temp')
-    assert script == 'cpu_temp.py'
+def test_get_sensor_type():
+    stype = get_sensor_type('rpi_cpu_temp')
+    assert stype == 'temperature'
 
-    script = get_sensor_script('rpi_cppu_temp')
-    assert script == None
+    stype = get_sensor_type('rpi_cppu_temp')
+    assert stype == None
 
 def test_get_sensor_interval():
     interval = get_sensor_interval('rpi_cpu_temp')
