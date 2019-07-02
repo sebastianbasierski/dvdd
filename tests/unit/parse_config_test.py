@@ -16,8 +16,8 @@ def test_get_sensor_name():
 
 def test_get_sensor_idx():
     idx = get_sensor_idx('rpi_cpu_temp')
-    assert idx == '0'
-    assert int(idx) == 0
+    assert idx == '1'
+    assert int(idx) == 1
 
     idx = get_sensor_idx('rpi_cppu_temp')
     assert int(idx) == -1

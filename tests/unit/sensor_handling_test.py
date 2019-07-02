@@ -29,6 +29,8 @@ def test_get_json():
     sensor = Sensor(name)
     assert sensor != None
 
+    sensor.idx = 1
+    sensor.stype = "temperature"
     json = sensor.get_json()
     assert json != None
 
