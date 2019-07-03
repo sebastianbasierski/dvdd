@@ -14,18 +14,17 @@ class Sensor:
     def hs_stop(self):
         self.alive = False
 
+    def get_temperature_json(self, temp):
+        return "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(temp)
+
     def get_cpu_temperature_json(self):
-        cpu_temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
-        print "cpu temp: " + str(cpu_temp)
-        json = "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(cpu_temp)
-        return json
+        temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
+        return self.get_temperature_json(temp)
 
     def get_ds1820_temperature_json(self):
         ds_sensor = w1thermsensor.W1ThermSensor()
         temp = ds_sensor.get_temperature()
-        print "ds1820 temp: " + str(temp)
-        json = "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(temp)
-        return json
+        return self.get_temperature_json(temp)
 
     def get_json(self):
         switcher = {
