@@ -5,10 +5,9 @@ class Config:
         except ImportError:
             from ConfigParser import ConfigParser # ver. > 3.0
 
-        self.file = '/etc/domoticz/domoticz.conf'
-
         self.config = ConfigParser()
-        self.config.read(self.file)
+
+        self.set_config('/etc/domoticz/domoticz.conf')
 
     def set_config(self, nfile):
         self.file = nfile
