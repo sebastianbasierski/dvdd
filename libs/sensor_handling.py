@@ -1,6 +1,7 @@
 import os
 import time
 import subprocess
+import w1thermsensor
 from libs.sender import *
 from libs.parse_config import *
 from libs.parse_interval import *
@@ -19,9 +20,17 @@ class Sensor:
         json = "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(cpu_temp)
         return json
 
+    def get_ds1820_temperature_json(self):
+        ds_sensor = w1thermsensor.W1ThermSensor()
+        temp = ds_sensor.get_temperature()
+        print "ds1820 temp: " + str(temp)
+        json = "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(temp)
+        return json
+
     def get_json(self):
         switcher = {
-                "temperature": self.get_cpu_temperature_json
+                "temperature": self.get_cpu_temperature_json,
+                "temperature_ds1820": self.get_ds1820_temperature_json
         }
 
         func = switcher.get(self.stype, lambda: "Invalid sensor type")
