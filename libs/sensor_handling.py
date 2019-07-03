@@ -11,7 +11,7 @@ class Sensor:
         self.sensor = sensor
         self.alive = True
 
-    def hs_stop(self):
+    def stop(self):
         self.alive = False
 
     def get_temperature_json(self, temp):

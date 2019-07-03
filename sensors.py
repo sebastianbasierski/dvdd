@@ -14,7 +14,7 @@ def signal_handler(sig, frame):
     print "Your pressed ctrl + c"
 
     for s in storage:
-        s.get_sensor().hs_stop()
+        s.get_sensor().stop()
         s.get_thread().join()
 
     sys.exit(0)
