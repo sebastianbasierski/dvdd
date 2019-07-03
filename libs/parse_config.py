@@ -1,3 +1,35 @@
+def get_server_ip():
+    try:
+        from configparser import ConfigParser
+    except ImportError:
+        from ConfigParser import ConfigParser  # ver. < 3.0
+
+    # instantinate
+    config = ConfigParser()
+
+    # parse existing config
+    config.read('/etc/domoticz/domoticz.conf')
+
+    # read values from a section
+    ip = config.get('server', 'ip')
+    return ip
+
+def get_server_port():
+    try:
+        from configparser import ConfigParser
+    except ImportError:
+        from ConfigParser import ConfigParser  # ver. < 3.0
+
+    # instantinate
+    config = ConfigParser()
+
+    # parse existing config
+    config.read('/etc/domoticz/domoticz.conf')
+
+    # read values from a section
+    ip = config.get('server', 'port')
+    return ip
+
 def get_sensors_count():
     try:
         from configparser import ConfigParser

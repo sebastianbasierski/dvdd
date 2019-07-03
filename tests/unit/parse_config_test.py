@@ -36,3 +36,10 @@ def test_get_sensor_interval():
     interval = get_sensor_interval('rpi_cppu_temp')
     assert interval == None
 
+def test_get_server_ip():
+    ip = get_server_ip()
+    assert ip == '172.16.2.40'
+
+def test_get_server_port():
+    port = get_server_port()
+    assert port == '8080'

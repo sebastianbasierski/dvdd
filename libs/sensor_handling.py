@@ -41,8 +41,8 @@ class Sensor:
         self.stype = get_sensor_type(self.sensor)
         interval = get_sensors_parse_interval(get_sensor_interval(self.sensor))
 
-        ip = '172.16.2.40'
-        port = '8080'
+        ip = get_server_ip()
+        port = get_server_port()
         sender = Sender(ip, port, self.idx)
 
         if int(interval) == None:
