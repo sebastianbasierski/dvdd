@@ -1,120 +1,59 @@
-def get_server_ip():
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
+class Config:
+    def __init__(self):
+        try:
+            from configparser import ConfigParser
+        except ImportError:
+            from ConfigParser import ConfigParser # ver. > 3.0
 
-    # instantinate
-    config = ConfigParser()
+        self.file = '/etc/domoticz/domoticz.conf'
 
-    # parse existing config
-    config.read('/etc/domoticz/domoticz.conf')
+        self.config = ConfigParser()
+        self.config.read(self.file)
 
-    # read values from a section
-    ip = config.get('server', 'ip')
-    return ip
+    def set_config(self, nfile):
+        self.file = nfile
 
-def get_server_port():
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
+        self.config.read(nfile)
 
-    # instantinate
-    config = ConfigParser()
+    def get_server_ip(self):
+        return self.config.get('server' , 'ip')
 
-    # parse existing config
-    config.read('/etc/domoticz/domoticz.conf')
+    def get_server_port(self):
+        # read values from a section
+        return self.config.get('server', 'port')
 
-    # read values from a section
-    ip = config.get('server', 'port')
-    return ip
+    def get_sensors_count(self):
+        return self.config.get('sensors', 'count')
 
-def get_sensors_count():
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
+    def get_sensor_name(self, idx):
+        try:
+            name = self.config.get('sensors', 'sensor' + str(idx))
+        except:
+            name = None
 
-    # instantiate
-    config = ConfigParser()
+        return name
 
-    # parse existing file
-    config.read('/etc/domoticz/domoticz.conf')
+    def get_sensor_idx(self, name):
+        try:
+            idx = self.config.get(name, 'idx')
+        except:
+            idx = -1
 
-    # read values from a section
-    count = config.get('sensors', 'count')
-    return count
+        return idx
 
-def get_sensor_name(idx):
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
+    def get_sensor_type(self, name):
+        try:
+            script = self.config.get(name, 'type')
+        except:
+            script = None
 
-    config = ConfigParser()
+        return script
 
-    config.read('/etc/domoticz/domoticz.conf')
+    def get_sensor_interval(self, name):
+        try:
+            interval = self.config.get(name, 'interval')
+        except:
+            interval = None
 
-    # read sensor name
-    try:
-        name = config.get('sensors', 'sensor' + str(idx))
-    except:
-        name = None
-
-    return name
-
-def get_sensor_idx(name):
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
-
-    config = ConfigParser()
-
-    config.read('/etc/domoticz/domoticz.conf')
-
-    # read sensor name
-    try:
-        idx = config.get(name, 'idx')
-    except:
-        idx = -1
-
-    return idx
-
-def get_sensor_type(name):
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
-
-    config = ConfigParser()
-
-    config.read('/etc/domoticz/domoticz.conf')
-
-    # read sensor name
-    try:
-        script = config.get(name, 'type')
-    except:
-        script = None
-
-    return script
-
-def get_sensor_interval(name):
-    try:
-        from configparser import ConfigParser
-    except ImportError:
-        from ConfigParser import ConfigParser  # ver. < 3.0
-
-    config = ConfigParser()
-
-    config.read('/etc/domoticz/domoticz.conf')
-
-    # read sensor name
-    try:
-        interval= config.get(name, 'interval')
-    except:
-        interval = None
-
-    return interval
+        return interval
 

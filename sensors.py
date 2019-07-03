@@ -27,10 +27,11 @@ def sensor_thread(idx):
 def main():
     global storage
 
-    count = get_sensors_count()
+    config = Config()
+    count = config.get_sensors_count()
 
     for idx in range(int(count)):
-        sensor = Sensor(get_sensor_name(idx))
+        sensor = Sensor(config.get_sensor_name(idx), config)
         thread = Thread(target=sensor_thread, args=(idx,))
         storage.append(Storage(thread, sensor))
 
