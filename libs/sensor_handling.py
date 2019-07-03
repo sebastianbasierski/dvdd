@@ -7,8 +7,9 @@ from libs.parse_config import *
 from libs.parse_interval import *
 
 class Sensor:
-    def __init__(self, sensor):
+    def __init__(self, sensor, config):
         self.sensor = sensor
+        self.config = config
         self.alive = True
 
     def stop(self):
@@ -37,12 +38,12 @@ class Sensor:
 
     def handle_sensor(self, one_time = None):
         one_time = one_time or False
-        self.idx = get_sensor_idx(self.sensor)
-        self.stype = get_sensor_type(self.sensor)
-        interval = get_sensors_parse_interval(get_sensor_interval(self.sensor))
+        self.idx = self.config.get_sensor_idx(self.sensor)
+        self.stype = self.config.get_sensor_type(self.sensor)
+        interval = get_sensors_parse_interval(self.config.get_sensor_interval(self.sensor))
 
-        ip = get_server_ip()
-        port = get_server_port()
+        ip = self.config.get_server_ip()
+        port = self.config.get_server_port()
         sender = Sender(ip, port, self.idx)
 
         if int(interval) == None:
