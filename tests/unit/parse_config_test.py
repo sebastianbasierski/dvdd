@@ -4,14 +4,14 @@ from libs.parse_config import *
 
 def test_get_sensors_count():
     count = get_sensors_count()
-    assert count == '1'
-    assert int(count) == 1
+    assert count == '2'
+    assert int(count) == 2
 
 def test_get_sensor_name():
     name = get_sensor_name(0)
     assert name == 'rpi_cpu_temp'
 
-    name = get_sensor_name(1)
+    name = get_sensor_name(3)
     assert name == None
 
 def test_get_sensor_idx():
