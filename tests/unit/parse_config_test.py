@@ -1,6 +1,10 @@
 import pytest
 from libs.parse_config import *
 
+def test_set_file():
+    config = Config()
+    config.set_config('/domoticz/domoticz.conf')
+    assert config.file == '/domoticz/domoticz.conf'
 
 def test_get_sensors_count():
     config = Config()
