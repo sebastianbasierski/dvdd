@@ -3,12 +3,9 @@ import sys
 import urllib
 
 class Sender():
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, idx):
         self.ip = ip
         self.port = port
-        self.idx = 0
-
-    def setup(self, idx):
         self.idx = idx
 
     def send(self, json):

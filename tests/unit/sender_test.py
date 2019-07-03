@@ -6,12 +6,12 @@ port = '8080'
 
 def test_sender_creation():
     
-    sender = Sender(ip, port)
+    sender = Sender(ip, port, 0)
     assert sender != None
 
 def test_sender_send():
 
-    sender = Sender(ip, port)
+    sender = Sender(ip, port, 0)
     assert sender != None
 
     ret = sender.send(None)
@@ -22,8 +22,7 @@ def test_sender_send():
 
 def test_sender_set_idx():
 
-    sender = Sender(ip, port)
+    sender = Sender(ip, port, 1)
     assert sender != None
 
-    sender.setup(1)
     assert sender.idx == 1

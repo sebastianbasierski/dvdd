@@ -43,8 +43,7 @@ class Sensor:
 
         ip = '172.16.2.40'
         port = '8080'
-        sender = Sender(ip, port)
-        sender.setup(self.idx)
+        sender = Sender(ip, port, self.idx)
 
         if int(interval) == None:
             return False
