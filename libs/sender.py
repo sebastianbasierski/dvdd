@@ -15,7 +15,7 @@ class Sender():
             return False
 
         # parameters
-        cmd = "http://172.16.2.40:8080/" + json
+        cmd = "http://" + str(self.ip) + ":" + str(self.port) + "/" + json
         verbose = 1  # set to 1 to print out information to the console
 
         # replace 1000.0 with 1000 to round to nearest degree   
