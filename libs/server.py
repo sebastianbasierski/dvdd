@@ -1,6 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import parse_qs
+from threading import Thread
+import signal
+import time
 import cgi
+import sys
 
 class GP(BaseHTTPRequestHandler):
 	def __init__(self, *args):
@@ -46,11 +50,34 @@ class GP(BaseHTTPRequestHandler):
 	        print form.getvalue("bin")
 	        self.wfile.write("<html><body><h1>POST Request Received!</h1></body></html>")
 
+httpd = 0
 def run(server_class=HTTPServer, handler_class=GP, port=8080):
-	server_address = ('', port)
-	httpd = server_class(server_address, handler_class)
-	print 'Server running at localhost:8080...'
-	httpd.serve_forever()
+        global httpd
+        server_address = ('', port)
+        httpd = server_class(server_address, handler_class)
+        print 'Server running at localhost:' + str(port) + '...'
+        httpd.serve_forever()
 
-run(HTTPServer, GP, 8080)
+def close():
+        global httpd
+
+        httpd.shutdown()
+
+def run_thread():
+        run(HTTPServer, GP, 8079)
+
+def signal_handler(sig, frame):
+        global thread
+
+        print 'ctrl + c'
+        close()
+        thread.join()
+        sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
+thread = Thread(target=run_thread, args=())
+thread.start()
+while True:
+        signal.pause()
 
