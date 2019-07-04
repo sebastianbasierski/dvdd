@@ -60,3 +60,12 @@ def test_get_debug():
     debug = config.get_debug()
     assert debug == '1'
 
+def test_set_file():
+    config = Config()
+    ret = config.set_config('/domoticz/x.conf')
+    assert ret == False
+
+    ret = config.set_config('/domoticz/domoticz.conf')
+    assert ret == True
+    fname = config.file
+    assert fname == '/domoticz/domoticz.conf'
