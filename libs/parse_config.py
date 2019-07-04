@@ -1,3 +1,5 @@
+import os
+
 class Config:
     def __init__(self):
         try:
@@ -5,6 +7,7 @@ class Config:
         except ImportError:
             from ConfigParser import ConfigParser # ver. > 3.0
 
+        self.config_file_set = False
         self.config = ConfigParser()
 
         self.set_config('/etc/domoticz/domoticz.conf')
@@ -12,21 +15,33 @@ class Config:
     def set_config(self, nfile):
         self.file = nfile
 
+        ret = os.path.isfile(self.file)
+        if ret == False:
+            return ret
+
         self.config.read(nfile)
+        self.config_file_set = True
+
+        return ret
+
+    def read_config(self, section, key):
+        if self.config_file_set == False:
+            return None
+        return self.config.get(section, key)
 
     def get_server_ip(self):
-        return self.config.get('server' , 'ip')
+        return self.read_config('server' , 'ip')
 
     def get_server_port(self):
         # read values from a section
-        return self.config.get('server', 'port')
+        return self.read_config('server', 'port')
 
     def get_sensors_count(self):
-        return self.config.get('sensors', 'count')
+        return self.read_config('sensors', 'count')
 
     def get_sensor_name(self, idx):
         try:
-            name = self.config.get('sensors', 'sensor' + str(idx))
+            name = self.read_config('sensors', 'sensor' + str(idx))
         except:
             name = None
 
@@ -34,7 +49,7 @@ class Config:
 
     def get_sensor_idx(self, name):
         try:
-            idx = self.config.get(name, 'idx')
+            idx = self.read_config(name, 'idx')
         except:
             idx = -1
 
@@ -42,7 +57,7 @@ class Config:
 
     def get_sensor_type(self, name):
         try:
-            script = self.config.get(name, 'type')
+            script = self.read_config(name, 'type')
         except:
             script = None
 
@@ -50,11 +65,12 @@ class Config:
 
     def get_sensor_interval(self, name):
         try:
-            interval = self.config.get(name, 'interval')
+            interval = self.read_config(name, 'interval')
         except:
             interval = None
 
         return interval
 
     def get_debug(self):
-        return self.config.get('general', 'debug')
+        return self.read_config('general', 'debug')
+
