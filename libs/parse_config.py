@@ -17,12 +17,13 @@ class Config:
 
         ret = os.path.isfile(self.file)
         if ret == False:
-            return ret
+            self.config_file_set = False
+            return False
 
         self.config.read(nfile)
         self.config_file_set = True
 
-        return ret
+        return True
 
     def read_config(self, section, key):
         if self.config_file_set == False:
@@ -76,3 +77,11 @@ class Config:
 
     def get_local_port(self):
         return self.read_config('general', 'local_port')
+
+    def get_gpio(self, name):
+        try :
+            gpio = self.read_config(name, 'gpio')
+        except:
+            gpio = None
+
+        return gpio

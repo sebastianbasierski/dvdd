@@ -9,8 +9,8 @@ def test_set_file():
 def test_get_sensors_count():
     config = Config()
     count = config.get_sensors_count()
-    assert count == '2'
-    assert int(count) == 2
+    assert count == '3'
+    assert int(count) == 3
 
 def test_get_sensor_name():
     config = Config()
@@ -65,10 +65,21 @@ def test_get_local_port():
     port = config.get_local_port()
     assert port == '8079'
 
+def test_get_gpio():
+    config = Config()
+    gpio = config.get_gpio('rpi_button')
+    assert gpio == '22'
+
+    gpio = config.get_gpio('spi_ds1820')
+    assert gpio == None
+
 def test_set_file():
     config = Config()
     ret = config.set_config('/domoticz/x.conf')
     assert ret == False
+
+    port = config.get_gpio('rpi_button')
+    assert port == None
 
     ret = config.set_config('/domoticz/domoticz.conf')
     assert ret == True
