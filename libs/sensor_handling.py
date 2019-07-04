@@ -2,6 +2,7 @@ import os
 import time
 import subprocess
 import w1thermsensor
+import RPi.GPIO as GPIO
 from libs.sender import *
 from libs.parse_config import *
 from libs.parse_interval import *
@@ -19,7 +20,14 @@ class Sensor:
         return "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(temp)
 
     def get_button_json(self):
-        return self.get_simple_json('1')
+        GPIO.setmode(GPIO.BCM)
+        gpio = self.config.get_gpio(self.sensor)
+        if gpio == None:
+            return None
+
+        GPIO.setup(int(gpio), GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+        val = GPIO.input(int(gpio))
+        return self.get_simple_json(str(val))
 
     def get_cpu_temperature_json(self):
         temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
@@ -59,7 +67,8 @@ class Sensor:
             # send data
             print "send data"
             json = self.get_json()
-            sender.send(json)
+            if json != None:
+                sender.send(json)
 
             # sleep
             for i in range(int(interval)):
