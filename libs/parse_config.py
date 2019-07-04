@@ -74,3 +74,5 @@ class Config:
     def get_debug(self):
         return self.read_config('general', 'debug')
 
+    def get_local_port(self):
+        return self.read_config('general', 'local_port')

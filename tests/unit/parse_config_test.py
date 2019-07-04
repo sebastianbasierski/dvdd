@@ -60,6 +60,11 @@ def test_get_debug():
     debug = config.get_debug()
     assert debug == '1'
 
+def test_get_local_port():
+    config = Config()
+    port = config.get_local_port()
+    assert port == '8079'
+
 def test_set_file():
     config = Config()
     ret = config.set_config('/domoticz/x.conf')

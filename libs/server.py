@@ -49,9 +49,10 @@ class GP(BaseHTTPRequestHandler):
 	        self.wfile.write("<html><body><h1>POST Request Received!</h1></body></html>")
 
 class Server:
-    def __init__(self):
+    def __init__(self, port):
         self.thread = None
         self.httpd = None
+        self.port = port
 
     def run(self, server_class=HTTPServer, handler_class=GP, port=8080):
             server_address = ('', port)
@@ -63,5 +64,5 @@ class Server:
         self.httpd.shutdown()
 
     def run_thread(self):
-        self.run(HTTPServer, GP, 8079)
+        self.run(HTTPServer, GP, self.port)
 
