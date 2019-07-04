@@ -56,3 +56,5 @@ class Config:
 
         return interval
 
+    def get_debug(self):
+        return self.config.get('general', 'debug')

@@ -55,3 +55,8 @@ def test_get_server_port():
     port = config.get_server_port()
     assert port == '8080'
 
+def test_get_debug():
+    config = Config()
+    debug = config.get_debug()
+    assert debug == '1'
+
