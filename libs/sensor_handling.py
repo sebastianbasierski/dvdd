@@ -15,20 +15,24 @@ class Sensor:
     def stop(self):
         self.alive = False
 
-    def get_temperature_json(self, temp):
+    def get_simple_json(self, temp):
         return "json.htm?type=command&param=udevice&idx=" + str(self.idx) + "&nvalue=0&svalue=" + str(temp)
+
+    def get_button_json(self):
+        return self.get_simple_json('1')
 
     def get_cpu_temperature_json(self):
         temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1000.0
-        return self.get_temperature_json(temp)
+        return self.get_simple_json(temp)
 
     def get_ds1820_temperature_json(self):
         ds_sensor = w1thermsensor.W1ThermSensor()
         temp = ds_sensor.get_temperature()
-        return self.get_temperature_json(temp)
+        return self.get_simple_json(temp)
 
     def get_json(self):
         switcher = {
+                "button": self.get_button_json,
                 "temperature": self.get_cpu_temperature_json,
                 "temperature_ds1820": self.get_ds1820_temperature_json
         }
