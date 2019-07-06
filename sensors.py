@@ -11,6 +11,7 @@ storage = []
 server = None
 server_thread = None
 
+
 def signal_handler(sig, frame):
     global storage
     global server
@@ -26,15 +27,18 @@ def signal_handler(sig, frame):
 
     sys.exit(0)
 
+
 def sensor_thread(idx):
     global storage
 
     s = storage[idx].get_sensor().handle_sensor()
 
+
 def server_thread():
     global server
 
     s = server.run_thread()
+
 
 def main():
     global server_thread
@@ -51,14 +55,14 @@ def main():
 
     for s in storage:
         s.get_thread().start()
-       
+
     server = Server(int(config.get_local_port()))
     server_thread = Thread(target=server_thread, args=())
     server_thread.start()
+
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
     main()
     while True:
         signal.pause()
-
