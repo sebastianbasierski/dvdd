@@ -1,7 +1,7 @@
 def get_sensors_parse_interval(interval):
 
     msg = interval.split(':')
-    if msg == None:
+    if msg is None:
         return None
 
     count = len(msg)

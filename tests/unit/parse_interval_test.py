@@ -8,10 +8,10 @@ def test_get_sensors_parse_interval():
     assert int(count) == 30
 
     count = get_sensors_parse_interval('-2s')
-    assert count == None
+    assert count is None
 
     count = get_sensors_parse_interval('-3')
-    assert count == None
+    assert count is None
 
     count = get_sensors_parse_interval('1m')
     assert count == 60
@@ -30,10 +30,7 @@ def test_get_sensors_parse_interval():
     assert int(count) == 7384
 
     count = get_sensors_parse_interval('x')
-    assert count == None
+    assert count is None
 
     count = get_sensors_parse_interval('xs')
-    assert count == None
-
-
-
+    assert count is None
