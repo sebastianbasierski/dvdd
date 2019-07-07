@@ -9,16 +9,16 @@ from libs.parse_interval import *
 class Sensor:
     def __init__(self, sensor, config):
         try:
-            import w1thermsensor
-            self.w1_enabled = True
+            import w1thermsensor as w1
+            self.w1 = w1
         except ImportError:
-            self.w1_enabled = False
+            self.w1 = None
 
         try:
             import RPi.GPIO as GPIO
-            self.rpi_gpio_enabled = True
+            self.rpi_gpio = GPIO
         except ImportError:
-            self.rpi_gpio_enabled = False
+            self.rpi_gpio = None
 
         self.sensor = sensor
         self.config = config
@@ -36,22 +36,29 @@ class Sensor:
         return self.get_simple_json('1')
 
     def get_button_json(self):
-        GPIO.setmode(GPIO.BCM)
+        if self.rpi_gpio is None:
+            return "not supported"
+        self.rpi_gpio.setmode(self.rpi_gpio.BCM)
         gpio = self.config.get_gpio(self.sensor)
         if gpio is None:
             return None
 
-        GPIO.setup(int(gpio), GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        val = GPIO.input(int(gpio))
+        self.rpi_gpio.setup(int(gpio), self.rpi_gpio.IN, pull_up_down=self.rpi_gpio.PUD_DOWN)
+        val = self.rpi_gpio.input(int(gpio))
         return self.get_simple_json(str(val))
 
     def get_cpu_temperature_json(self):
-        temp = int(open('/sys/class/thermal/thermal_zone0/temp').read())
+        try:
+            temp = int(open('/sys/class/thermal/thermal_zone0/temp').read())
+        except Exception:
+            return "not supported"
         temp /= 1000.0
         return self.get_simple_json(temp)
 
     def get_ds1820_temperature_json(self):
-        ds_sensor = w1thermsensor.W1ThermSensor()
+        if self.w1 is None:
+            return "not supported"
+        ds_sensor = self.w1.W1ThermSensor()
         temp = ds_sensor.get_temperature()
         return self.get_simple_json(temp)
 
