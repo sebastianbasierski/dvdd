@@ -22,6 +22,9 @@ class Sensor:
         value_json = "&nvalue=0&svalue=" + str(temp)
         return idx_json + value_json
 
+    def get_dummy_json(self):
+        return self.get_simple_json('1')
+
     def get_button_json(self):
         GPIO.setmode(GPIO.BCM)
         gpio = self.config.get_gpio(self.sensor)
@@ -45,6 +48,7 @@ class Sensor:
     def get_json(self):
         switcher = {
                 "button": self.get_button_json,
+                "dummy": self.get_dummy_json,
                 "temperature": self.get_cpu_temperature_json,
                 "temperature_ds1820": self.get_ds1820_temperature_json
         }
