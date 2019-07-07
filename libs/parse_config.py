@@ -1,11 +1,12 @@
 import os
 
+
 class Config:
     def __init__(self):
         try:
             from configparser import ConfigParser
         except ImportError:
-            from ConfigParser import ConfigParser # ver. > 3.0
+            from ConfigParser import ConfigParser  # ver. > 3.0
 
         self.config_file_set = False
         self.config = ConfigParser()
@@ -16,7 +17,7 @@ class Config:
         self.file = nfile
 
         ret = os.path.isfile(self.file)
-        if ret == False:
+        if ret is False:
             self.config_file_set = False
             return False
 
@@ -26,12 +27,12 @@ class Config:
         return True
 
     def read_config(self, section, key):
-        if self.config_file_set == False:
+        if self.config_file_set is False:
             return None
         return self.config.get(section, key)
 
     def get_server_ip(self):
-        return self.read_config('server' , 'ip')
+        return self.read_config('server', 'ip')
 
     def get_server_port(self):
         # read values from a section
@@ -79,7 +80,7 @@ class Config:
         return self.read_config('general', 'local_port')
 
     def get_gpio(self, name):
-        try :
+        try:
             gpio = self.read_config(name, 'gpio')
         except:
             gpio = None
