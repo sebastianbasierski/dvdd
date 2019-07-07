@@ -1,8 +1,6 @@
 import os
 import time
 import subprocess
-import w1thermsensor
-import RPi.GPIO as GPIO
 from libs.sender import *
 from libs.parse_config import *
 from libs.parse_interval import *
@@ -10,6 +8,18 @@ from libs.parse_interval import *
 
 class Sensor:
     def __init__(self, sensor, config):
+        try:
+            import w1thermsensor
+            self.w1_enabled = True
+        except ImportError:
+            self.w1_enabled = False
+
+        try:
+            import RPi.GPIO as GPIO
+            self.rpi_gpio_enabled = True
+        except ImportError:
+            self.rpi_gpio_enabled = False
+
         self.sensor = sensor
         self.config = config
         self.alive = True
