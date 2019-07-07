@@ -11,7 +11,7 @@ class Config:
         self.config_file_set = False
         self.config = ConfigParser()
 
-        self.set_config('/etc/domoticz/domoticz.conf')
+        self.set_config('/domoticz/domoticz.conf')
 
     def set_config(self, nfile):
         self.file = nfile
