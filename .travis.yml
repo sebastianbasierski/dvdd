@@ -1,0 +1,10 @@
+language: python
+sudo: required
+python:
+        - 2.7
+install:
+        - sudo pip install codecov
+        - sudo pip install pytest
+        - sudo pip install pytest-cov
+        - sudo pip install w1thermsensor
+script: sudo tools/tests_simple.sh
