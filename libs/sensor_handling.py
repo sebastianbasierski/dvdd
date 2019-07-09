@@ -2,12 +2,18 @@ import os
 import time
 import subprocess
 from libs.sender import *
+from libs.helpers import *
 from libs.parse_config import *
 from libs.parse_interval import *
 
 
 class Sensor:
     def __init__(self, sensor, config):
+        self.plafform = get_platform()
+        self.sensor = sensor
+        self.config = config
+        self.alive = True
+
         try:
             import w1thermsensor as w1
             self.w1 = w1
@@ -19,11 +25,7 @@ class Sensor:
             self.rpi_gpio = GPIO
         except ImportError:
             self.rpi_gpio = None
-
-        self.sensor = sensor
-        self.config = config
-        self.alive = True
-
+            
     def stop(self):
         self.alive = False
 
