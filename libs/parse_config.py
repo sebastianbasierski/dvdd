@@ -11,7 +11,8 @@ class Config:
         self.config_file_set = False
         self.config = ConfigParser()
 
-        self.set_config('/domoticz/domoticz.conf')
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        print 'current dir ' + dir_path
 
     def set_config(self, nfile):
         self.file = nfile
