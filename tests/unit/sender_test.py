@@ -1,5 +1,5 @@
 import pytest
-from libs.sender import *
+from libs.sender import Sender
 
 ip = '172.16.2.40'
 port = '8080'
