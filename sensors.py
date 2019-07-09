@@ -49,7 +49,7 @@ def main():
     ret = config.set_config('/domoticz/domoticz.conf')
     if ret is False:
         print "Wrong config file set"
-        exit (1)
+        exit(1)
 
     count = config.get_sensors_count()
 
