@@ -1,7 +1,7 @@
 import pytest
-from libs.helpers import *
-from libs.parse_config import *
-from libs.sensor_handling import *
+from libs.helpers import get_config_file_path
+from libs.parse_config import Config
+from libs.sensor_handling import Sensor
 
 
 def test_handle_sensor():
