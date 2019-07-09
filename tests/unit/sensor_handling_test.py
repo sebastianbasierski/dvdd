@@ -1,10 +1,12 @@
 import pytest
+from libs.helpers import *
 from libs.parse_config import *
 from libs.sensor_handling import *
 
 
 def test_handle_sensor():
     config = Config()
+    config.set_config(get_config_file_path())
     count = config.get_sensors_count()
     assert count == '4'
     assert int(count) == 4
@@ -21,6 +23,7 @@ def test_handle_sensor():
 
 def test_get_json():
     config = Config()
+    config.set_config(get_config_file_path())
     count = config.get_sensors_count()
     assert count == '4'
     assert int(count) == 4
@@ -39,6 +42,7 @@ def test_get_json():
 
 def test_get_ds1820_json():
     config = Config()
+    config.set_config(get_config_file_path())
     count = config.get_sensors_count()
     assert count == '4'
     assert int(count) == 4
@@ -56,6 +60,7 @@ def test_get_ds1820_json():
 
 def test_get_cpu_json():
     config = Config()
+    config.set_config(get_config_file_path())
     count = config.get_sensors_count()
     assert count == '4'
     assert int(count) == 4
@@ -73,6 +78,7 @@ def test_get_cpu_json():
 
 def test_get_button_json():
     config = Config()
+    config.set_config(get_config_file_path())
     count = config.get_sensors_count()
     assert count == '4'
     assert int(count) == 4
