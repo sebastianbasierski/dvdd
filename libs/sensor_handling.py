@@ -1,9 +1,8 @@
 import os
 import time
 import subprocess
-from libs.sender import *
-from libs.helpers import *
-from libs.parse_config import *
+from libs.sender import Sender
+from libs.helpers import get_platform
 from libs.parse_interval import *
 
 
