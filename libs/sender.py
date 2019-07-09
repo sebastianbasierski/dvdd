@@ -9,14 +9,12 @@ class Sender():
         self.port = port
         self.idx = idx
 
-    def send(self, json):
-
-        if json is None:
-            print "empty json passed"
-            return False
+    def send(self, msg):
+        if msg is None:
+            return -1
 
         # parameters
-        cmd = "http://" + str(self.ip) + ":" + str(self.port) + "/" + json
+        cmd = "http://" + str(self.ip) + ":" + str(self.port) + "/" + msg
         verbose = 1  # set to 1 to print out information to the console
 
         # replace 1000.0 with 1000 to round to nearest degree
@@ -28,7 +26,7 @@ class Sender():
                 print 'Response: ' + hf.read()
             hf.close
 
-            return True
+            return 0
 
         except:
-            return False
+            return -2

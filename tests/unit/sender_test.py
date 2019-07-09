@@ -17,15 +17,14 @@ def test_sender_send():
     assert sender is not None
 
     ret = sender.send(None)
-    assert ret is False
+    assert ret == -1
 
-    ret = sender.send("X")
-    assert ret is True
+    ret = sender.send('hello')
+    assert (ret == -2) or (ret == 0)
 
 
 def test_sender_set_idx():
 
     sender = Sender(ip, port, 1)
     assert sender is not None
-
     assert sender.idx == 1
