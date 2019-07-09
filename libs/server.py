@@ -17,7 +17,7 @@ class GP(BaseHTTPRequestHandler):
             self.end_headers()
 
         def do_HEAD(self):
-            self._set_header()
+            self._set_headers()
 
         def get_method_dummy(self):
             return 'dummy'
