@@ -43,7 +43,9 @@ class Sensor:
         if gpio is None:
             return None
 
-        self.rpi_gpio.setup(int(gpio), self.rpi_gpio.IN, pull_up_down=self.rpi_gpio.PUD_DOWN)
+        self.rpi_gpio.setup(int(gpio),
+                            self.rpi_gpio.IN,
+                            pull_up_down=self.rpi_gpio.PUD_DOWN)
         val = self.rpi_gpio.input(int(gpio))
         return self.get_simple_json(str(val))
 
