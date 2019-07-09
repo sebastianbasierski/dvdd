@@ -1,11 +1,11 @@
 #!/usr/bin/python
 import sys
 import signal
-from libs.server import *
+from libs.server import Server
 from libs.storage import *
 from threading import Thread
-from libs.parse_config import *
-from libs.sensor_handling import *
+from libs.parse_config import Config
+from libs.sensor_handling import Sensor
 
 storage = []
 server = None
