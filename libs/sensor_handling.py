@@ -9,10 +9,16 @@ from libs.parse_interval import *
 
 class Sensor:
     def __init__(self, sensor, config):
-        self.plafform = get_platform()
+        self.platform = get_platform()
         self.sensor = sensor
         self.config = config
         self.alive = True
+
+        self.w1 = None
+        self.rpi_gpio = None
+
+        if self.platform != "arm":
+            return
 
         try:
             import w1thermsensor as w1
@@ -25,7 +31,7 @@ class Sensor:
             self.rpi_gpio = GPIO
         except ImportError:
             self.rpi_gpio = None
-            
+
     def stop(self):
         self.alive = False
 
