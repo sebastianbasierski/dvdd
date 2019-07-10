@@ -76,7 +76,7 @@ def test_get_cpu_json():
     assert json is not None
 
 
-def test_get_button_json():
+def test_get_io_input_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
@@ -90,5 +90,5 @@ def test_get_button_json():
     assert sensor is not None
 
     sensor.idx = 6
-    json = sensor.get_button_json()
+    json = sensor.get_io_input_json()
     assert json is not None
