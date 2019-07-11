@@ -46,7 +46,7 @@ def main():
     global server
 
     config = Config()
-    ret = config.set_config('/domoticz/domoticz.conf')
+    ret = config.set_config('/etc/domoticz/domoticz.conf')
     if ret is False:
         print "Wrong config file set"
         exit(1)
