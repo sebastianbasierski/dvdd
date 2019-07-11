@@ -63,7 +63,8 @@ class Server:
     def run(self, server_class=HTTPServer, handler_class=GP, port=8080):
         server_address = ('', port)
         self.httpd = server_class(server_address, handler_class)
-        print 'Server running at localhost:' + str(port) + '...'
+        if self.debug == 1:
+            print 'Server running at localhost:' + str(port) + '...'
         self.httpd.serve_forever()
 
     def stop(self):
