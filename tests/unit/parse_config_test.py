@@ -1,8 +1,9 @@
 import os
 import pytest
-from libs.helpers import *
 from libs.parse_config import *
 
+def get_config_file_path():
+    return os.getcwd() + '/tools/domoticz.conf'
 
 def test_set_file():
     config = Config()

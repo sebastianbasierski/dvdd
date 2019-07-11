@@ -1,7 +1,10 @@
+import os
 import pytest
-from libs.helpers import get_config_file_path
 from libs.parse_config import Config
 from libs.sensor_handling import Sensor
+
+def get_config_file_path():
+    return os.getcwd() + '/tools/domoticz.conf'
 
 
 def test_handle_sensor():
