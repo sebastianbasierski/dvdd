@@ -12,6 +12,7 @@ class Sensor:
         self.sensor = sensor
         self.config = config
         self.alive = True
+        self.debug = int(self.config.get_debug())
 
         self.w1 = None
         self.rpi_gpio = None
