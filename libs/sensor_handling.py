@@ -43,6 +43,22 @@ class Sensor:
     def get_dummy_json(self):
         return self.get_simple_json('1')
 
+    def get_io_output_json(self):
+        if self.rpi_gpio is None:
+            return "not supported"
+        self.rpi_gpio.setmode(self.rpi_gpio.BCM)
+        gpio = self.config.get_gpio(self.sensor)
+        if gpio is None:
+            return None
+
+        # to update
+        self.rpi_gpio.setup(int(gpio),
+                            self.rpi_gpio.OUT,
+                            pull_up_down=self.rpi_gpio.PUD_DOWN)
+        # to update
+        val = self.rpi_gpio.input(int(gpio))
+        return self.get_simple_json(str(val))
+
     def get_io_input_json(self):
         if self.rpi_gpio is None:
             return "not supported"
@@ -76,6 +92,7 @@ class Sensor:
         switcher = {
                 "dummy": self.get_dummy_json,
                 "io_input": self.get_io_input_json,
+                "io_output": self.get_io_output_json,
                 "temperature_rpi_cpu": self.get_rpi_cpu_temperature_json,
                 "temperature_ds1820": self.get_ds1820_temperature_json
         }
