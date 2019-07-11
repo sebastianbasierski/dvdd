@@ -3,6 +3,7 @@ import pytest
 from libs.parse_config import Config
 from libs.sensor_handling import Sensor
 
+
 def get_config_file_path():
     return os.getcwd() + '/tools/domoticz.conf'
 
