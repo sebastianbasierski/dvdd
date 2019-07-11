@@ -53,15 +53,18 @@ class GP(BaseHTTPRequestHandler):
 
 
 class Server:
-    def __init__(self, port):
+    def __init__(self, config):
+        self.config = config
         self.thread = None
         self.httpd = None
-        self.port = port
+        self.port = int(self.config.get_local_port())
+        self.debug = int(self.config.get_debug())
 
     def run(self, server_class=HTTPServer, handler_class=GP, port=8080):
         server_address = ('', port)
         self.httpd = server_class(server_address, handler_class)
-        print 'Server running at localhost:' + str(port) + '...'
+        if self.debug == 1:
+            print 'Server running at localhost:' + str(port) + '...'
         self.httpd.serve_forever()
 
     def stop(self):
