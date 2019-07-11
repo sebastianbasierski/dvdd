@@ -12,6 +12,7 @@ class Sensor:
         self.sensor = sensor
         self.config = config
         self.alive = True
+        self.debug = int(self.config.get_debug())
 
         self.w1 = None
         self.rpi_gpio = None
@@ -98,7 +99,8 @@ class Sensor:
 
         while self.alive:
             # send data
-            print "send data"
+            if self.debug == 1:
+                print "send data"
             json = self.get_json()
             if json is not None:
                 sender.send(json)
@@ -106,7 +108,8 @@ class Sensor:
             # sleep
             for i in range(int(interval)):
                 # print alive value
-                print "Alive " + str(self.alive)
+                if self.debug == 1:
+                    print "Alive " + str(self.alive)
 
                 # sleep for a second
                 time.sleep(1)

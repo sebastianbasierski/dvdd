@@ -61,7 +61,7 @@ def main():
     for s in storage:
         s.get_thread().start()
 
-    server = Server(int(config.get_local_port()))
+    server = Server(config)
     server_thread = Thread(target=server_thread, args=())
     server_thread.start()
 
