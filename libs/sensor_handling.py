@@ -57,7 +57,7 @@ class Sensor:
         val = self.rpi_gpio.input(int(gpio))
         return self.get_simple_json(str(val))
 
-    def get_cpu_temperature_json(self):
+    def get_rpi_cpu_temperature_json(self):
         try:
             temp = int(open('/sys/class/thermal/thermal_zone0/temp').read())
         except Exception:
@@ -74,9 +74,9 @@ class Sensor:
 
     def get_json(self):
         switcher = {
-                "io_input": self.get_io_input_json,
                 "dummy": self.get_dummy_json,
-                "temperature": self.get_cpu_temperature_json,
+                "io_input": self.get_io_input_json,
+                "temperature_rpi_cpu": self.get_rpi_cpu_temperature_json,
                 "temperature_ds1820": self.get_ds1820_temperature_json
         }
 

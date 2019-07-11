@@ -58,7 +58,7 @@ def test_get_ds1820_json():
     assert json is not None
 
 
-def test_get_cpu_json():
+def test_get_cpu_temperature_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
@@ -72,7 +72,7 @@ def test_get_cpu_json():
     assert sensor is not None
 
     sensor.idx = 1
-    json = sensor.get_cpu_temperature_json()
+    json = sensor.get_rpi_cpu_temperature_json()
     assert json is not None
 
 
