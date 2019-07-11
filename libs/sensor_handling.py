@@ -96,8 +96,6 @@ class Sensor:
         if int(interval) is None:
             return False
 
-        script_dir = '/domoticz/'
-
         while self.alive:
             # send data
             print "send data"
