@@ -8,4 +8,12 @@ Domoticz Virtual Device Daemon
 <br>
 Domoticz Virtual Device Daemon is a project allowing to handle multiple Domoticz virtual devices on one physical linux board.<br>
 It does not matter if this is a small board or regular desktop pc (of course some devices may not be supported on various platforms).
-
+<br>
+Installation
+------------
+Preffered way of installation is to use setup.sh script.<br>
+``` bash
+./setup.sh install
+```
+Please note, that installation should be executed as root user, <br>
+since systemd service is added during this process.<br>
