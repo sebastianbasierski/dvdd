@@ -22,8 +22,8 @@ def test_get_sensors_count():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
 
 def test_get_sensor_name():

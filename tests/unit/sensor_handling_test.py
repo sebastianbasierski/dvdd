@@ -11,8 +11,8 @@ def test_handle_sensor():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
     name = config.get_sensor_name(0)
     assert name == 'dummy_sensor'
@@ -28,8 +28,8 @@ def test_get_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
     name = config.get_sensor_name(0)
     assert name == 'dummy_sensor'
@@ -47,8 +47,8 @@ def test_get_ds1820_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
     name = config.get_sensor_name(2)
     assert name == 'rpi_ds1820'
@@ -65,8 +65,8 @@ def test_get_cpu_temperature_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
     name = config.get_sensor_name(1)
     assert name == 'rpi_cpu_temp'
@@ -83,8 +83,8 @@ def test_get_io_input_json():
     config = Config()
     config.set_config(get_config_file_path())
     count = config.get_sensors_count()
-    assert count == '4'
-    assert int(count) == 4
+    assert count == '5'
+    assert int(count) == 5
 
     name = config.get_sensor_name(3)
     assert name == 'rpi_button'
@@ -95,3 +95,22 @@ def test_get_io_input_json():
     sensor.idx = 6
     json = sensor.get_io_input_json()
     assert json is not None
+
+
+def test_get_io_output_json():
+    config = Config()
+    config.set_config(get_config_file_path())
+    count = config.get_sensors_count()
+    assert count == '5'
+    assert int(count) == 5
+
+    name = config.get_sensor_name(4)
+    assert name == 'rpi_relay'
+
+    sensor = None
+    try:
+        sensor = Sensor(name, config)
+    except ValueError:
+        sensor = None
+    finally:
+        assert sensor is None

@@ -14,6 +14,9 @@ class Sensor:
         self.alive = True
         self.debug = int(self.config.get_debug())
 
+        if self.config.get_sensor_type(self.sensor) == "io_output":
+            raise ValueError('Sensor type handled in other way')
+
         self.w1 = None
         self.rpi_gpio = None
 
