@@ -19,8 +19,8 @@ Preffered way of installation is to use setup.sh script.<br>
 Please note, that installation should be executed as root user, <br>
 since systemd service is added during this process.<br>
 
-Configure
-------------
+Configuration
+-------------
 DVDD's default config file is placed in /etc/domoticz/domoticz.conf.<br>
 It contains at least 3 sections:
 ```
@@ -73,7 +73,7 @@ Only for raspberry pi and other SoCs, not applicable for x86 cpus.<br>
 This sensor must have an 'gpio' parameter set.<br>
 
 Start/Stop
-------------
+----------
 DVDD is controlled by systemd service, so can be started/stopped using <br>
 standard commands<br>
 ``` bash
