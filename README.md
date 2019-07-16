@@ -49,29 +49,29 @@ interval=30s
 ```
 
 There are some parameters to be set:
-* idx<br>
+*   idx<br>
 Parameter have to be retreived from domoticz instance.<br>
 
-* type<br>
+*   type<br>
 Sensor type (explained below).<br>
 
-* interval<br>
+*   interval<br>
 Only for sensors that sends data to domoticz instance.<br>
 
-* gpio<br>
+*   gpio<br>
 Only for I/O sensors.<br>
 
 Sensor types:
-* dummy_sensor<br>
+*   dummy_sensor<br>
 Sensor basically do nothing, except sending fixed value ('1') in given interval.<br>
 
-* temperature_rpi_cpu<br>
+*   temperature_rpi_cpu<br>
 Sensor grabs raspberry pi cpu temperature.<br>
 
-* temperature_ds1820<br>
+*   temperature_ds1820<br>
 Sensor gets temperature from ds1820 sensor (for now only one sensor).<br>
 
-* io_input<br>
+*   io_input<br>
 Sensor gets cpu I/O state.<br>
 Only for raspberry pi and other SoCs, not applicable for x86 cpus.<br>
 This sensor must have an 'gpio' parameter set.<br>
@@ -93,4 +93,3 @@ It can also be controlled using setup.sh script.<br>
 ``` bash
 ./setup.sh stop
 ```
-
