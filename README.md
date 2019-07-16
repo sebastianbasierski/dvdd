@@ -18,3 +18,21 @@ Preffered way of installation is to use setup.sh script.<br>
 ```
 Please note, that installation should be executed as root user, <br>
 since systemd service is added during this process.<br>
+
+Start/Stop
+------------
+DVDD is controlled by systemd service, so can be started/stopped using <br>
+standard commands<br>
+``` bash
+systemctl start domoticz-sensors.service
+```
+``` bash
+systemctl stop domoticz-sensors.service
+```
+It can also be controlled using setup.sh script.<br>
+``` bash
+./setup.sh start
+```
+``` bash
+./setup.sh stop
+```
