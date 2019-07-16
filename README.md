@@ -36,8 +36,12 @@ port=8080 # domoticz server port
 count=0 # sensors count
 ```
 
-There are also sensors sections
+There are also sensors sections. User should set proper 'count' value.
 ```
+[sensors]
+count=1 # sensors count
+sensor0=dummy_sensor
+
 [dummy_sensor]
 idx=0
 type=dummy
