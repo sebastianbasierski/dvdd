@@ -21,7 +21,7 @@ since systemd service is added during this process.<br>
 
 Configure
 ------------
-DVDD's default config file is places in /etc/domoticz/domoticz.conf.<br>
+DVDD's default config file is placed in /etc/domoticz/domoticz.conf.<br>
 It contains at least 3 sections:
 ```
 [general]
@@ -43,9 +43,10 @@ idx=0
 type=dummy
 interval=30s
 ```
-Each devices should have set parameters :
+
+There are some parameters to be set:
 * idx<br>
-Parameter have to be get from domoticz instance.<br>
+Parameter have to be retreived from domoticz instance.<br>
 
 * type<br>
 Sensor type (explained below).<br>
@@ -53,17 +54,18 @@ Sensor type (explained below).<br>
 * interval<br>
 Only for sensors that sends data to domoticz instance.<br>
 
+* gpio<br>
+Only for I/O sensors.<br>
 
-Sensor type:
+Sensor types:
 * dummy_sensor<br>
-Sensor basically do nothing, except sensing fixed value ('1') in given interval.<br>
+Sensor basically do nothing, except sending fixed value ('1') in given interval.<br>
 
 * temperature_rpi_cpu<br>
 Sensor grabs raspberry pi cpu temperature.<br>
 
 * temperature_ds1820<br>
-Sensor gets temperature from ds1820 sensor (for now only one sensor per bus is
-allowed).<br>
+Sensor gets temperature from ds1820 sensor (for now only one sensor).<br>
 
 * io_input<br>
 Sensor gets cpu I/O state.<br>
