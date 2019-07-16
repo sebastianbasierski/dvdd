@@ -31,13 +31,13 @@ def signal_handler(sig, frame):
 def sensor_thread(idx):
     global storage
 
-    s = storage[idx].get_sensor().handle_sensor()
+    storage[idx].get_sensor().handle_sensor()
 
 
-def server_thread():
+def local_server_thread():
     global server
 
-    s = server.run_thread()
+    server.run_thread()
 
 
 def main():
@@ -55,7 +55,7 @@ def main():
 
     for idx in range(int(count)):
         sensor = Sensor(config.get_sensor_name(idx), config)
-        thread = Thread(target=sensor_thread, args=(idx,))
+        thread = Thread(target=local_server_thread, args=(idx,))
         storage.append(Storage(thread, sensor))
 
     for s in storage:
