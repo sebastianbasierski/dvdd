@@ -44,31 +44,31 @@ type=dummy
 interval=30s
 ```
 Each devices should have set parameters :
-* idx
-Parameter have to be get from domoticz instance.
+* idx<br>
+Parameter have to be get from domoticz instance.<br>
 
-* type
-Sensor type (explained below).
+* type<br>
+Sensor type (explained below).<br>
 
-* interval
-Only for sensors that sends data to domoticz instance.
+* interval<br>
+Only for sensors that sends data to domoticz instance.<br>
 
 
 Sensor type:
-* dummy_sensor
-Sensor basically do nothing, except sensing fixed value ('1') in given interval.
+* dummy_sensor<br>
+Sensor basically do nothing, except sensing fixed value ('1') in given interval.<br>
 
-* temperature_rpi_cpu
-Sensor grabs raspberry pi cpu temperature.
+* temperature_rpi_cpu<br>
+Sensor grabs raspberry pi cpu temperature.<br>
 
-* temperature_ds1820
+* temperature_ds1820<br>
 Sensor gets temperature from ds1820 sensor (for now only one sensor per bus is
-allowed).
+allowed).<br>
 
-* io_input
-Sensor gets cpu I/O state.
-Only for raspberry pi and other SoCs, not applicable for x86 cpus.
-This sensor must have an 'gpio' parameter set.
+* io_input<br>
+Sensor gets cpu I/O state.<br>
+Only for raspberry pi and other SoCs, not applicable for x86 cpus.<br>
+This sensor must have an 'gpio' parameter set.<br>
 
 Start/Stop
 ------------
