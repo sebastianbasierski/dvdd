@@ -19,6 +19,57 @@ Preffered way of installation is to use setup.sh script.<br>
 Please note, that installation should be executed as root user, <br>
 since systemd service is added during this process.<br>
 
+Configure
+------------
+DVDD's default config file is places in /etc/domoticz/domoticz.conf.<br>
+It contains at least 3 sections:
+```
+[general]
+debug=1 # prints debug message to log
+local_port=8080 # sets local server port (for handling output devices)
+
+[server]
+ip=172.16.2.40 # domoticz server ip address
+port=8080 # domoticz server port
+
+[sensors]
+count=0 # sensors count
+```
+
+There are also sensors sections
+```
+[dummy_sensor]
+idx=0
+type=dummy
+interval=30s
+```
+Each devices should have set parameters :
+* idx
+Parameter have to be get from domoticz instance.
+
+* type
+Sensor type (explained below).
+
+* interval
+Only for sensors that sends data to domoticz instance.
+
+
+Sensor type:
+* dummy_sensor
+Sensor basically do nothing, except sensing fixed value ('1') in given interval.
+
+* temperature_rpi_cpu
+Sensor grabs raspberry pi cpu temperature.
+
+* temperature_ds1820
+Sensor gets temperature from ds1820 sensor (for now only one sensor per bus is
+allowed).
+
+* io_input
+Sensor gets cpu I/O state.
+Only for raspberry pi and other SoCs, not applicable for x86 cpus.
+This sensor must have an 'gpio' parameter set.
+
 Start/Stop
 ------------
 DVDD is controlled by systemd service, so can be started/stopped using <br>
@@ -36,3 +87,4 @@ It can also be controlled using setup.sh script.<br>
 ``` bash
 ./setup.sh stop
 ```
+
