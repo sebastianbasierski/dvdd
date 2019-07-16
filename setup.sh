@@ -16,9 +16,6 @@ else
 	exit 1
 fi
 
-# check current dir
-dir=$(pwd)
-
 case $mode in
 	'install')
 		sudo cp ${service_file} "/lib/systemd/system/${service_file}"
