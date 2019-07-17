@@ -80,7 +80,7 @@ Only for raspberry pi and other SoCs, not applicable for x86 cpus.<br>
 This sensor must have an 'gpio' parameter set.<br>
 
 
-GPIO numbers
+GPIO numbers.<br>
 A 'gpio' parameter values are taken from pins names.<br>
 Raspberry PI pins names are built like 'GPIOX', and X is a numer we <br>
 are looking for.
