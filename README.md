@@ -98,9 +98,9 @@ It can also be controlled using setup.sh script.<br>
 
 Domoticz Configuration
 ----------------------
-|DVDD               |Domoticz    |
-|:-----------------:|:----------:|
-|dummy_sensor       |Dummy       |
-|temperature_rpi_cpu|Temp        |
-|temperature_ds1820 |Temp        |
-|io_input           |General     |
+|DVDD|Domoticz|
+|:--:|:------:|
+|dummy_sensor|Dummy|
+|temperature_rpi_cpu|Temp|
+|temperature_ds1820 |Temp|
+|io_input|General|
