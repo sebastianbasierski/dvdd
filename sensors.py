@@ -38,9 +38,14 @@ class Main():
         count = config.get_sensors_count()
 
         for idx in range(int(count)):
-            sensor = Sensor(config.get_sensor_name(idx), config)
-            thread = Thread(target=self.sensor_thread, args=(idx,))
-            self.storage.append(Storage(thread, sensor))
+            try:
+                sensor = Sensor(config.get_sensor_name(idx), config)
+            except ValueError:
+                sensor = None
+
+            if sensor is not None:
+                thread = Thread(target=self.sensor_thread, args=(idx,))
+                self.storage.append(Storage(thread, sensor))
 
         for s in self.storage:
             s.get_thread().start()
