@@ -103,4 +103,4 @@ Domoticz Configuration
 |dummy_sensor       |Dummy       |
 |temperature_rpi_cpu|Temp        |
 |temperature_ds1820 |Temp        |
-|io_input           |Light/Switch|
+|io_input           |General     |
