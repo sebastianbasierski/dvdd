@@ -102,3 +102,12 @@ It can also be controlled using setup.sh script.<br>
 ``` bash
 ./setup.sh stop
 ```
+
+Domoticz Configuration
+----------------------
+|DVDD|Domoticz|
+|:--:|:------:|
+|dummy_sensor|Dummy|
+|temperature_rpi_cpu|Temp|
+|temperature_ds1820 |Temp|
+|io_input|General|
