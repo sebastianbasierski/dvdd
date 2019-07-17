@@ -8,7 +8,7 @@ from libs.parse_config import Config
 from libs.sensor_handling import Sensor
 
 
-class Main:
+class Main():
     def __init__(self):
         self.storage = []
         self.server = None
