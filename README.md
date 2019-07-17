@@ -95,4 +95,3 @@ It can also be controlled using setup.sh script.<br>
 ``` bash
 ./setup.sh stop
 ```
-
