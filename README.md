@@ -65,7 +65,8 @@ Only for I/O sensors.<br>
 
 Sensor types:
 *   dummy_sensor<br>
-Sensor basically do nothing, except sending fixed value ('1') in given interval.<br>
+Sensor basically do nothing, except sending fixed value ('1') in given<br>
+interval.<br>
 
 *   temperature_rpi_cpu<br>
 Sensor grabs raspberry pi cpu temperature.<br>
@@ -77,6 +78,12 @@ Sensor gets temperature from ds1820 sensor (for now only one sensor).<br>
 Sensor gets cpu I/O state.<br>
 Only for raspberry pi and other SoCs, not applicable for x86 cpus.<br>
 This sensor must have an 'gpio' parameter set.<br>
+
+
+GPIO numbers
+A 'gpio' parameter values are taken from pins names.<br>
+Raspberry PI pins names are built like 'GPIOX', and X is a numer we <br>
+are looking for.
 
 Start/Stop
 ----------
