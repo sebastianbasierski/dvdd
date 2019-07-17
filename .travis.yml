@@ -12,5 +12,4 @@ install:
 script:
         - sudo tools/tests_simple.sh
 after_success:
-        - coveralls
         - codecov
