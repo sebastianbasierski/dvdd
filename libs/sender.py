@@ -24,7 +24,7 @@ class Sender():
             if verbose > 0:
                 print ('Uploaded to Pi: ' + cmd)
                 print ('Response: ' + hf.read())
-            hf.close
+            hf.close()
 
             return 0
 
