@@ -1,0 +1,16 @@
+language: python
+sudo: required
+python:
+        - 2.7
+#env:
+#        - CODECOV_TOKEN="6edf0c17-485b-4ef3-8d62-995e9799e693"
+install:
+        - sudo pip install codecov
+        - sudo pip install pytest
+        - sudo pip install pytest-cov
+        - sudo pip install w1thermsensor
+script:
+        - sudo tools/tests_simple.sh
+after_success:
+        - coveralls
+        - codecov

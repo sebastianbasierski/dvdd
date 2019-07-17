@@ -1,0 +1,8 @@
+*.pyc
+htmlcov/
+libs/*cover
+.coverage
+reports/
+*gz
+*swp
+libs/*swo
