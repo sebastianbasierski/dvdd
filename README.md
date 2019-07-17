@@ -6,8 +6,10 @@ Domoticz Virtual Device Daemon
 [![Coverage Status](https://coveralls.io/repos/github/sebastianbasierski/dvdd/badge.svg?branch=master)](https://coveralls.io/github/sebastianbasierski/dvdd?branch=master)
 <br>
 <br>
-Domoticz Virtual Device Daemon is a project allowing to handle multiple Domoticz virtual devices on one physical linux board.<br>
-It does not matter if this is a small board or regular desktop pc (of course some devices may not be supported on various platforms).
+Domoticz Virtual Device Daemon is a project allowing to handle multiple<br>
+Domoticz virtual devices on one physical linux board. It does not matter<br>
+if this is a small board or regular desktop pc (of course some devices may<br>
+not be supported on various platforms).
 <br>
 
 Installation
