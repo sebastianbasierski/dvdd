@@ -22,10 +22,12 @@ class Config:
             self.config_file_set = False
             return False
 
-        self.config.read(nfile)
-        self.config_file_set = True
+        with open(nfile) as f:
+            self.config.read_file(f)
+            self.config_file_set = True
+            return True
 
-        return True
+        return False
 
     def read_config(self, section, key):
         if self.config_file_set is False:
