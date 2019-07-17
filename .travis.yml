@@ -7,10 +7,11 @@ python:
 install:
         - sudo pip install codecov
         - sudo pip install pytest
+        - sudo pip install pytest-pep8
         - sudo pip install pytest-cov
         - sudo pip install w1thermsensor
 script:
-        - sudo tools/tests_simple.sh
+        - sudo python -m pytest tests/ --doctest-modules -v --cov coveralls --cov-report term-missing --cov=libs --cov-report term --cov-report=annotate
 after_success:
         - coveralls
         - codecov
