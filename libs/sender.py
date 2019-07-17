@@ -22,8 +22,8 @@ class Sender():
             # use Domoticz JSON url to update
             hf = urllib.urlopen(cmd)
             if verbose > 0:
-                print 'Uploaded to Pi: ' + cmd
-                print 'Response: ' + hf.read()
+                print ('Uploaded to Pi: ' + cmd)
+                print ('Response: ' + hf.read())
             hf.close
 
             return 0

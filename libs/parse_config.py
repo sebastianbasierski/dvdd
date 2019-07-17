@@ -12,7 +12,7 @@ class Config:
         self.config = ConfigParser()
 
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        print 'current dir ' + dir_path
+        print ('current dir ' + dir_path)
 
     def set_config(self, nfile):
         self.file = nfile

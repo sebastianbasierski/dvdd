@@ -1,5 +1,4 @@
-import pytest
-from libs.helpers import *
+from libs.helpers import get_platform
 
 
 def test_get_platform():

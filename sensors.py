@@ -32,7 +32,7 @@ class Main():
         config = Config()
         ret = config.set_config('/etc/domoticz/domoticz.conf')
         if ret is False:
-            print "Wrong config file set"
+            print ("Wrong config file set")
             return -1
 
         count = config.get_sensors_count()
@@ -58,9 +58,9 @@ if __name__ == '__main__':
         exit(1)
 
     def signal_handler(*args):
-        print "Your pressed ctrl + c"
+        print ("Your pressed ctrl + c")
         sensors.stop()
-        print "stopped sensors"
+        print ("stopped sensors")
         sys.exit(0)
 
     signal.signal(signal.SIGINT, signal_handler)

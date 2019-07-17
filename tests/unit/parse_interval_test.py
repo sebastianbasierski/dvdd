@@ -1,4 +1,3 @@
-import pytest
 from libs.parse_interval import *
 
 

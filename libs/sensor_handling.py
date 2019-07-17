@@ -100,7 +100,7 @@ class Sensor:
         while self.alive:
             # send data
             if self.debug == 1:
-                print "send data"
+                print ("send data")
             json = self.get_json()
             if json is not None:
                 sender.send(json)
@@ -109,7 +109,7 @@ class Sensor:
             for i in range(int(interval)):
                 # print alive value
                 if self.debug == 1:
-                    print "Alive " + str(self.alive)
+                    print ("Alive " + str(self.alive))
 
                 # sleep for a second
                 time.sleep(1)

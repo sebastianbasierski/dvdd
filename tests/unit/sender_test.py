@@ -1,4 +1,3 @@
-import pytest
 from libs.sender import Sender
 
 ip = '172.16.2.40'

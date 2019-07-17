@@ -1,5 +1,4 @@
 import os
-import pytest
 from libs.parse_config import Config
 from libs.sensor_handling import Sensor
 
