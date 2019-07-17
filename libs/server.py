@@ -1,12 +1,13 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import parse_qs
 from threading import Thread
+import logging
 import cgi
 import sys
 
 
-class GP(BaseHTTPRequestHandler):
-    def __init__(self, *args):
+class HttpServerHandler(BaseHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
         self.get_method = self.get_method_dummy
         self.post_method = self.post_method_dummy
         BaseHTTPRequestHandler.__init__(self, *args)
@@ -30,7 +31,9 @@ class GP(BaseHTTPRequestHandler):
         print self.get_method()
         print self.path
         print parse_qs(self.path[2:])
-        resp = "<html><body><h1>Get Request Received!</h1></body></html>"
+        header = "<html><body><h1>Get Request Received!"
+        footer = "</h1></body></html>"
+        resp = header + self.server.handler() + footer
         self.wfile.write(resp)
 
     def post_method_dummy(self):
@@ -46,10 +49,43 @@ class GP(BaseHTTPRequestHandler):
             headers=self.headers,
             environ={'REQUEST_METHOD': 'POST'}
         )
-        print form.getvalue("foo")
-        print form.getvalue("bin")
+        # print form.getvalue("foo")
+        # print form.getvalue("bin")
         resp = "<html><body><h1>POST Request Received!</h1></body></html>"
         self.wfile.write(resp)
+
+
+class MyHTTPServer(HTTPServer):
+    def __init__(self, server_address, RequestHandlerClass, handler):
+        HTTPServer.__init__(self, server_address, RequestHandlerClass)
+        self.handler = handler
+
+
+class HttpServer:
+    def __init__(self, name, host, port, handler):
+        self.name = name
+        self.host = host
+        self.port = port
+        self.handler = handler
+        self.server = None
+
+    def start(self):
+        logging.info(
+            'Starting %s at %s:%d' % (self.name, self.host, self.port))
+        # we need use MyHttpServer here
+        self.server = MyHTTPServer((self.host, self.port), HttpServerHandler,
+                                   self.handler)
+        self.server.serve_forever()
+
+    def stop(self):
+        if self.server:
+            logging.info('Stopping %s at %s:%d' % (self.name, self.host,
+                                                   self.port))
+            self.server.shutdown()
+
+
+def server_handler():
+    return "uga"
 
 
 class Server:
@@ -59,16 +95,17 @@ class Server:
         self.httpd = None
         self.port = int(self.config.get_local_port())
         self.debug = int(self.config.get_debug())
+        logging.basicConfig(
+            format='%(asctime)s [%(levelname)s] %(message)s',
+            level=logging.INFO)
 
-    def run(self, server_class=HTTPServer, handler_class=GP, port=8080):
-        server_address = ('', port)
-        self.httpd = server_class(server_address, handler_class)
-        if self.debug == 1:
-            print 'Server running at localhost:' + str(port) + '...'
-        self.httpd.serve_forever()
+    def run(self, port):
+        self.server = HttpServer(
+            "test server", "localhost", port, server_handler)
+        self.server.start()
 
     def stop(self):
-        self.httpd.shutdown()
+        self.server.stop()
 
     def run_thread(self):
-        self.run(HTTPServer, GP, self.port)
+        self.run(self.port)
