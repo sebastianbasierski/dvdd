@@ -25,7 +25,7 @@ Configuration
 -------------
 DVDD's default config file is placed in /etc/domoticz/domoticz.conf.<br>
 It contains at least 3 sections:
-+++
+```
 [general]
 debug=1 # prints debug message to log
 local_port=8080 # sets local server port (for handling output devices)
@@ -36,10 +36,10 @@ port=8080 # domoticz server port
 
 [sensors]
 count=0 # sensors count
-+++
+```
 
 There are also sensors sections. User should set proper 'count' value.
-+++
+```
 [sensors]
 count=1 # sensors count
 sensor0=dummy_sensor
@@ -48,7 +48,7 @@ sensor0=dummy_sensor
 idx=0
 type=dummy
 interval=30s
-+++
+```
 
 There are some parameters to be set:
 *   idx<br>
