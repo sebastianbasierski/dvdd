@@ -22,6 +22,9 @@ case $mode in
 		sudo mkdir -p ${settings_dir}
 		sudo cp ${config_file} ${settings_file_dest}
 		sudo systemctl daemon-reload
+
+		# install deps
+		pip install --user configparser
 		;;
 
 	'remove')
